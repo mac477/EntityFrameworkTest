@@ -52,5 +52,8 @@ class CreateEntityAndCheckRelatedCollectionStateAlgorithm : AlgorithmBase
 		//p2 still is not null
 		
 		SaveChanges();
+		
+		p2 = team.PersonColl.FirstOrDefault(f => f.Name.Equals("person1"));
+		//Now p2 is null
 	}
 }
