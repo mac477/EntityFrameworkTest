@@ -6,7 +6,9 @@ namespace EntityTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //Console.WriteLine("Hello World!");
+            //DbInit dbInit = new DbInit();
+            //dbInit.Init();
         }
     }
 }
