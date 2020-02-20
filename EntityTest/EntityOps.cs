@@ -42,28 +42,33 @@ namespace EntityTest
             return person;
         }
 
-        public int CreateAndSavePerson()
+        public Person CreateAndSavePerson()
         {
             Person person = CreatePerson();
             DbContext.PersonColl.Add(person);
             SaveChanges();
-            return person.Id;
+            return person;
         }
 
-        public Person CreateAndGetPersoFromRelatedCollectionn()
+        public Person CreateAndGetPersoFromRelatedCollection(bool saveChanges = false)
         {
-            Person p = CreatePerson();
-
+            Person p = null;
+            if (saveChanges)
+                p = CreateAndSavePerson();
+            else
+                p = CreatePerson();
             Team team = DbContext.Teams.Find(1);
             Person p2 = team.PersonColl.FirstOrDefault(f => f.Id == p.Id);
             return p2;
         }
 
-        public Person DeleteAndGetPersonFromRelatedCollection(int personId)
+        public Person DeleteAndGetPersonFromRelatedCollection(int personId, bool saveChanges = false)
         {
             Team team = DbContext.Teams.Find(1);
             Person person = team.PersonColl.FirstOrDefault(f => f.Id == personId);
             Delete(person);
+            if (saveChanges)
+                SaveChanges();
             return team.PersonColl.FirstOrDefault(f => f.Id == personId);
         }
     }
